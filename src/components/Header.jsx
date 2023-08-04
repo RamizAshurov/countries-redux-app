@@ -1,13 +1,13 @@
 import styled from 'styled-components';
-import {useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import { IoMoon, IoMoonOutline } from 'react-icons/io5';
 
 import { Container } from './Container';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { setTheme } from "../store/theme/theme-actions.js"
-import { cleanUp } from '../store/controls/controls-actions';
+
+import { cleanUp } from '../features/controls/controlsSlice';
+import { useTheme } from '../features/theme/useTheme';
 
 const HeaderEl = styled.header`
   box-shadow: var(--shadow);
@@ -40,13 +40,8 @@ const ModeSwitcher = styled.div`
 
 export const Header = () => {
   const dispatch = useDispatch();
-  const theme = useSelector(state => state.theme)
 
-  useEffect(() => {
-    document.body.setAttribute('data-theme', theme);
-  }, [theme]);
-
-  const toggleTheme = () => dispatch(setTheme(theme === "light" ? "dark" : "light"))
+  const [theme, toggleTheme] = useTheme()
 
   return (
     <HeaderEl>

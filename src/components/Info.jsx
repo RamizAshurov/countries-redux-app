@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { loadingNeighbours } from '../store/country-details/country-details-actions';
-import { selectNeighbours } from '../store/country-details/country-details-selectors';
+
+import { fetchNeighbours } from '../features/country-detail/countryDetailsSlice';
+import { selectNeighbours } from '../features/country-detail/countryDetailsSlice';
 
 const Wrapper = styled.section`
   margin-top: 3rem;
@@ -111,7 +112,7 @@ export const Info = (props) => {
 
   useEffect(() => {
     if (borders.length) {
-      dispatch(loadingNeighbours(borders))
+      dispatch(fetchNeighbours(borders))
     }
   }, [])
 
